@@ -1,0 +1,39 @@
+{% extends "alm2map/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content-section %}
+<h1>CMB map calculation with <em><a href=http://www.glesp.nbi.dk>GLESP</a></em> procedure</h1>
+{% if error_msg %}
+  <script>alert('{{ error_msg|safe }}')</script>
+{% endif %}
+{% if  forms %}
+  <center>
+    <form action="{% url 'alm2map:processing' %}" method="post"
+        enctype="multipart/form-data">
+      {% csrf_token %}
+      <p><input type="submit" value="Submit"/></p>
+    <table align="center" class="boxshadowStyle borderStyle multiColumnStyle wtable">
+      <tr>
+      {% for form in forms %}
+        <td><h2>{{ form.label }}</h2>
+        <table class="boxshadowStyle" table-layout="fixed" width="150px">
+        {{ form.as_table }}
+        </table>
+      </td>
+      {% if forloop.last %}
+        </tr>
+      {% else %}
+        {% if forloop.counter|divisibleby:"3" %}
+          </tr><tr>
+        {% endif %}
+      {% endif %}
+      {% endfor %}
+    </table>
+      <p><input type="submit" value="Submit"/></p>
+    </form>
+  </center>
+{% endif %}
+{% endblock content-section %}

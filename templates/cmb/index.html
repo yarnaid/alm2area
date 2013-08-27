@@ -1,0 +1,90 @@
+<!-- index page -->
+
+{% load staticfiles %}
+
+<center>
+    <h1>Radio cosmology. Information system</h1>
+</center>
+
+<table align="center" border="0" cellspacing="0" cellpadding="6" width="60%">
+    <tr>
+        <td align="center" colspan="2">
+            <img vspace="15" src="{% static "images/planck_1000.gif" %}"
+            alt="Planck map with lmax=1000" border="3"
+            width="60" height="50"></td>
+    </tr>
+    <tr valign="top">
+        <td valign="top" width="417">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td valign="top">
+                        <a href="http://lambda.gsfc.nasa.gov">
+                            <img
+                            src="{{STATIC_URL}}images/planck_1000.gif" hspace="10"
+                            vspace="0" border="1" width="270" height="140"
+                            alt="WMAP CMB map"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>
+                            <br> <font face="helvetica">This work has been supported by
+                                <a href="http://www.rfbr.ru">the Russian Foundation of Basic Research</a>
+                                (grant No 666-13-13).
+                                <br></font>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+
+            <td valign="top" width="300">
+                <a href="{% url 'alm2map:index' %}"> <i>alm2map</i>
+                    conversion
+                </a>
+                <br>
+                <a href="http://sed.sao.ru/cgi-bin/age_z.pl"> <i>age</i>
+                    &
+                    <i>z</i>
+                    calc for radio galaxies
+                </a>
+                <br>
+                <a href="http://cats.sao.ru/cats_search_by_match.html">
+                    radio galaxy
+                    <i>identification</i>
+                </a>
+                <br>
+                <a href="http://cmb.sao.ru/map_archive.html">CMB map archive</a>
+                <br>
+                <a href="http://cmb.sao.ru/~vo/software.html">our related software</a>
+                <br>
+                <a href="http://cmb.sao.ru/~vo/cosmo_links.html">related links</a>
+                <br>
+                <a href="http://cmb.sao.ru/cmb_Edescr.html">about</a>
+                <br></td>
+        </tr>
+        <tr>
+            <td colspan="9"></td>
+        </tr>
+        <tr>
+            <td align="bottom">
+                <a href="http://www.sao.ru">
+                    <img
+    src="http://sed.sao.ru/gifs/sao.jpg" alt="SAO"
+     border="3" width="116" height="75"></a>
+            </td>
+            <td align="right">
+                <a href="http://www.rfbr.ru">
+                    <img
+    src="http://sed.sao.ru/gifs/rffi.jpg" alt="RFFI"
+     border="3" width="116" height="75"></a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<hr>
+<i>Maintenance:
+    <a href="mailto:yarnaid@gmail.com">
+        <address>yarnaid@gmail.com</address>
+    </a>
+    (Yaroslav Naiden)</i> 

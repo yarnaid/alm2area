@@ -1,0 +1,11 @@
+
+venv
+*.pyc
+#staticfiles
+cscope*
+env*
+__pycharm*
+file*
+PYSMELL*
+tags*
+.idea
