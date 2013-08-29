@@ -23,12 +23,6 @@ DATABASES = {
     }
 }
 
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(default='sqlite://localhost/sqlite3.db')
-print(DATABASES)
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
@@ -173,31 +167,31 @@ INSTALLED_APPS = (
 )
 
 INTERNAL_IPS = (
+    '127.0.0.1',
     '127.0.0.0/24',
     '192.168.2.0/24',
     '192.168.3./24',
     'localhost',
 )
 
-#if DEBUG:
-#    print('BEGIN DEBUGGING!!!')
-#    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-#    INSTALLED_APPS += ('debug_toolbar',)
-#    DEBUG_TOOLBAR_PANELS = (
-#        'debug_toolbar.panels.version.VersionDebugPanel',
-#        'debug_toolbar.panels.timer.TimerDebugPanel',
-#        'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-#        'debug_toolbar.panels.headers.HeaderDebugPanel',
-#        'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-#        'debug_toolbar.panels.template.TemplateDebugPanel',
-#        'debug_toolbar.panels.sql.SQLDebugPanel',
-#        'debug_toolbar.panels.cache.CacheDebugPanel',
-#        'debug_toolbar.panels.logger.LoggingPanel',
-#    )
-#    DEBUG_TOOLBAR_CONFIG = {
-#        'EXCLUDE_URLS': ('/admin',),
-#        'INTERCEPT_REDIRECTS': False,
-#    }
+if DEBUG:
+    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    INSTALLED_APPS += ('debug_toolbar',)
+    DEBUG_TOOLBAR_PANELS = (
+        'debug_toolbar.panels.version.VersionDebugPanel',
+        'debug_toolbar.panels.timer.TimerDebugPanel',
+        'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+        'debug_toolbar.panels.headers.HeaderDebugPanel',
+        'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+        'debug_toolbar.panels.template.TemplateDebugPanel',
+        'debug_toolbar.panels.sql.SQLDebugPanel',
+        'debug_toolbar.panels.cache.CacheDebugPanel',
+        'debug_toolbar.panels.logger.LoggingPanel',
+    )
+    DEBUG_TOOLBAR_CONFIG = {
+        'EXCLUDE_URLS': ('/admin',),
+        'INTERCEPT_REDIRECTS': False,
+    }
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -228,3 +222,12 @@ LOGGING = {
     }
 }
 
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config(default='sqlite://localhost/sqlite3.db')
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
