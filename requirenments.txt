@@ -1,0 +1,9 @@
+Django==1.5.2
+argparse==1.2.1
+django-debug-toolbar==0.9.4
+django-extensions==1.2.0
+django-ide==0.0.5
+glespy==0.1.1
+numpy==1.7.1
+six==1.4.1
+wsgiref==0.1.2
