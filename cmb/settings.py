@@ -3,6 +3,7 @@ import os
 
 
 DEBUG = True
+#DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -14,7 +15,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'sqlite3.db', # Or path to database file if using sqlite3.
+        'NAME': '/home/yarnaid/cmb_server/sqlite3.db', # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'yarnaid',
         'PASSWORD': '12',
@@ -66,11 +67,11 @@ _PATH = os.path.abspath(os.path.dirname(__file__))
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = os.path.join(_PATH, 'media')
-MEDIA_ALM2MAP = 'alm2map'
-MEDIA_ALM2MAP_IMAGE = os.path.join(MEDIA_ALM2MAP, 'image')
-MEDIA_ALM2MAP_MAP = os.path.join(MEDIA_ALM2MAP, 'map')
-MEDIA_ALM2MAP_ALM = os.path.join(MEDIA_ALM2MAP, 'alm')
-MEDIA_ALM2MAP_MASK = os.path.join(MEDIA_ALM2MAP, 'mask')
+MEDIA_ALM2AREA = 'alm2area'
+MEDIA_ALM2AREA_IMAGE = os.path.join(MEDIA_ALM2AREA, 'image')
+MEDIA_ALM2AREA_MAP = os.path.join(MEDIA_ALM2AREA, 'map')
+MEDIA_ALM2AREA_ALM = os.path.join(MEDIA_ALM2AREA, 'alm')
+MEDIA_ALM2AREA_MASK = os.path.join(MEDIA_ALM2AREA, 'mask')
 
 FILE_UPLOAD_HANDLERS = (
     # "django.core.files.uploadhandler.MemoryFileUploadHandler",
@@ -78,9 +79,11 @@ FILE_UPLOAD_HANDLERS = (
 )
 
 ALLOWED_INCLUDE_ROOTS = [
-    MEDIA_ALM2MAP_IMAGE,
-    MEDIA_ALM2MAP_MAP,
+    MEDIA_ALM2AREA_IMAGE,
+    MEDIA_ALM2AREA_MAP,
 ]
+
+URL_PREFIX=''
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -99,15 +102,13 @@ STATIC_ROOT = os.path.join(_PATH, 'static')
 STATIC_URL = '/static/'
 
 # Additional locations of static files
-STATIC_ALM = os.path.join(STATIC_ROOT, 'alm2map/alm')
-STATIC_MASK = os.path.join(STATIC_ROOT, 'alm2map/mask')
-STATIC_POINT_SOURCE = os.path.join(STATIC_ROOT, 'alm2map/point_source')
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    STATIC_ALM,
-    STATIC_MASK,
+    # os.path.join(_PATH, 'static'),
+    os.path.join(_PATH, 'static/alm2area'),
+    os.path.join(_PATH, '../alm2area/static')
 )
 
 # List of finder classes that know how to find static files in
@@ -161,9 +162,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    'alm2map',
-    'django_extensions',
-    'djide',
+    'alm2area',
+
 )
 
 INTERNAL_IPS = (
@@ -176,7 +176,11 @@ INTERNAL_IPS = (
 
 if DEBUG:
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-    INSTALLED_APPS += ('debug_toolbar',)
+    INSTALLED_APPS += (
+        'debug_toolbar',
+        'django_extensions',
+        'djide',
+        )
     DEBUG_TOOLBAR_PANELS = (
         'debug_toolbar.panels.version.VersionDebugPanel',
         'debug_toolbar.panels.timer.TimerDebugPanel',
@@ -223,11 +227,11 @@ LOGGING = {
 }
 
 # Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config(default='sqlite://localhost/sqlite3.db')
+# import dj_database_url
+# DATABASES['default'] =  dj_database_url.config(default='sqlite://localhost/sqlite3.db')
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']

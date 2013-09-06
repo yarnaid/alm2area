@@ -1,0 +1,53 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href={% static 'alm2area/django_screen.css' %} rel='stylesheet' type='text/css' media="screen">
+  <link href={% static 'alm2area/django_print.css' %} rel='stylesheet' type='text/css' media="print">
+  <link rel="stylesheet" href="{% static 'alm2area/style.css' %}" />
+  <title>{% block title %}GLESP ALM2AREA{% endblock %}</title>
+</head>
+
+<body id="documentation" class="default">
+  <div id="container">
+    <div id="header">
+      <h1 id="logo"><a href="http://www.sao.ru">SAO</a></h1>
+          <div id="nav-global">
+              {% block nav-global %}
+              <ul>
+                    <li><a href="/">Home</a></li>
+              <li><a href="/alm2area">Calculate ALM2AREA</a></li>
+              </ul>
+                {% endblock nav-global %}
+          </div>
+    </div>
+    <div id="billboard">
+      <h1><a href="/alm2area">ALM2AREA</a></h1>
+    </div>
+    <div id="columnwrap">
+          <div id="content-main">
+            {% block content-section %}
+            <div class="section">
+              <h1>Content Section</h1>
+            </div>
+            {% endblock content-section %}
+          </div>
+          <div id="content-related" class="sidebar">
+          {% block content-related %}
+            <h1>Additional information</h1>
+            {# {% debug %} #}
+          {% endblock content-related %}
+          </div>
+    </div>
+    <div id="footer">
+      <p>© 2013 <a href="/">SAO</a> unless otherwise noted.
+        <a href="http://www.sao.ru/">Linux Web hosting</a> graciously provided by SAO.
+        Coded with python and Django.
+      </p>
+      Mainteined by <a href= "mailto:yarnaid@gmail.com" >Yaroslav Naiden</a>
+    </div>
+  </div>
+
+
+</body>
+</html>

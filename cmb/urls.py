@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -17,18 +18,15 @@ urlpatterns = patterns('',
                        # include('django.contrib.admindocs.urls')),
 
                        # Uncomment the next line to enable the admin:
-                       url(r'^admin/', include(admin.site.urls)),
-                       url(r'^alm2map/', include(
-                           'alm2map.urls', namespace='alm2map')),
-                       url(r'^$', views.index),
-                       url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
-                            {'document_root': settings.STATIC_ROOT}),
-                       url(r'djide/', include('djide.urls')),
-                       )\
-              # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                       url(r'^%sadmin/'%(settings.URL_PREFIX), include(admin.site.urls)),
+                       url(r'^%salm2area/'%(settings.URL_PREFIX), include(
+                           'alm2area.urls', namespace='alm2area')),
+                       url(r'^%s$'%(settings.URL_PREFIX), include(
+                           'alm2area.urls', namespace='alm2area')),
+                       url(r'%sdjide/'%(settings.URL_PREFIX), include('djide.urls')),
+                       ) + staticfiles_urlpatterns()
 
 if settings.DEBUG:
-#     static files (images, css, javascript, etc.)
     urlpatterns += patterns('',
         (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
         'document_root': settings.MEDIA_ROOT}))
